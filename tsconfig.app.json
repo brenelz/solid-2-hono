@@ -26,8 +26,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": [
-    "src",
-    "virtual-solid.d.ts"
-  ]
+  "include": ["src"]
 }

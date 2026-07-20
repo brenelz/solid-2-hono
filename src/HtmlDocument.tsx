@@ -3,7 +3,6 @@ import { NoHydration } from 'solid-js'
 
 export interface DocumentAssets {
   entry?: string
-  js: { href: string }[]
   css: {
     href: string
     'data-vite-dev-id'?: string
@@ -28,9 +27,6 @@ export default function HtmlDocument(props: HtmlDocumentProps) {
         <NoHydration>
           {props.assets?.css.map(asset => (
             <link rel="stylesheet" {...asset} />
-          ))}
-          {props.assets?.js.map(asset => (
-            <link rel="modulepreload" {...asset} />
           ))}
           {props.devStylePatch && <script innerHTML={props.devStylePatch} />}
           <HydrationScript />

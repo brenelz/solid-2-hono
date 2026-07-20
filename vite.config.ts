@@ -1,33 +1,34 @@
+import devServer from '@hono/vite-dev-server'
 import { defineConfig } from 'vite'
-import solid, { serverFunctions } from 'vite-plugin-solid'
-import { nitro } from 'nitro/vite'
+import solid from 'vite-plugin-solid'
 
-export default defineConfig({
+export default defineConfig(({ command, isSsrBuild }) => ({
+  appType: 'custom',
   plugins: [
-    serverFunctions(),
-    solid({ ssr: true }),
-    nitro(),
+    solid({ ssr: true, serverFunctions: true }),
+    command === 'serve' && devServer({
+      entry: './server/app.ts',
+      injectClientScript: false,
+    }),
   ],
-  environments: {
-    nitro: {
-      resolve: {
-        noExternal: ['@solidjs/router'],
-      },
-    },
-    client: {
-      build: {
+  build: isSsrBuild
+    ? {
+        outDir: 'dist/server',
+        copyPublicDir: false,
+        rollupOptions: {
+          output: {
+            entryFileNames: 'index.js',
+          },
+        },
+      }
+    : {
+        outDir: 'dist/client',
         manifest: true,
         rollupOptions: {
           input: './src/entry-client.tsx',
         },
       },
-    },
-    ssr: {
-      build: {
-        rollupOptions: {
-          input: './src/entry-server.tsx',
-        },
-      },
-    },
+  ssr: {
+    noExternal: ['@solidjs/router'],
   },
-})
+}))

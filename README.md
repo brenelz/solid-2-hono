@@ -17,12 +17,17 @@ Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
 
 ### `npm run build`
 
-Builds the app for production to the `dist` folder.<br>
+Builds the browser bundle to `dist/client` and the Hono server to `dist/server`.<br>
 It correctly bundles Solid in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
+### `npm run preview`
+
+Starts the production Hono server at [http://localhost:3000](http://localhost:3000).
+Set `PORT` to use a different port.
+
 ## Deployment
 
-Learn more about deploying your application with the [documentations](https://vite.dev/guide/static-deploy.html)
+Run `node dist/server/index.js` from the project root on a Node.js host. The server serves the generated client assets and handles Solid SSR and server functions.
