@@ -1,9 +1,9 @@
-/* @refresh reload */
 import { createMemo, Loading } from 'solid-js'
-import { hello } from '../api.ts'
+import { hello, changeText } from '../api.ts'
 
 export default function Index() {
   const asyncValue = createMemo(() => hello())
+
   return (
     <section class="page">
       <p class="eyebrow">Route /</p>
@@ -14,6 +14,9 @@ export default function Index() {
         <Loading fallback={<p class="loading"><span class="loading-dot" />Loading...</p>}>
           <p class="result-value">{asyncValue()}</p>
         </Loading>
+        <form action={changeText} method="post">
+          <button class="change-text-button" type="submit">change text</button>
+        </form>
       </div>
     </section>
   )

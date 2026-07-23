@@ -1,4 +1,3 @@
-/* @refresh reload */
 export default function About() {
   return (
     <section class="page">

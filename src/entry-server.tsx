@@ -44,7 +44,13 @@ export default {
       }),
     }
 
-    return provideRequestEvent({ request, locals: {}, response }, () => {
+    return provideRequestEvent({
+      request,
+      locals: {
+        requestId: request.headers.get('x-request-id'),
+      },
+      response,
+    }, () => {
       const output = renderToStream(() => (
         <HtmlDocument
           assets={assets}

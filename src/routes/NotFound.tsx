@@ -1,4 +1,3 @@
-/* @refresh reload */
 export default function NotFound() {
   return (
     <section class="page">
