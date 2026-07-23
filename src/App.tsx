@@ -1,4 +1,4 @@
-import { A, Route, Router, type RouteSectionProps } from '@solidjs/router'
+import { createRouter, type RouteSectionProps } from '@solidjs/router'
 import { lazy } from 'solid-js'
 import { hello } from './api.ts'
 
@@ -6,18 +6,28 @@ const About = lazy(() => import('./routes/About.tsx'))
 const Index = lazy(() => import('./routes/Index.tsx'))
 const NotFound = lazy(() => import('./routes/NotFound.tsx'))
 
-interface AppProps {
-  url?: string
-}
+const Router = createRouter({
+  routes: [
+    {
+      path: '/',
+      component: Index,
+      preload() {
+        void hello()
+      },
+    },
+    { path: '/about', component: About },
+    { path: '*404', component: NotFound },
+  ],
+})
 
 function Layout(props: RouteSectionProps) {
   return (
     <main class="site-shell">
       <header class="site-header">
-        <A class="brand" href="/" end>Solid / SSR</A>
+        <a class="brand" href="/">Solid / SSR</a>
         <nav aria-label="Primary navigation">
-          <A href="/" end>Home</A>
-          <A href="/about">About</A>
+          <a href="/">Home</a>
+          <a href="/about">About</a>
         </nav>
       </header>
       <div class="route-stage">{props.children}</div>
@@ -29,14 +39,10 @@ function Layout(props: RouteSectionProps) {
   )
 }
 
-export default function App(props: AppProps) {
+export default function App() {
   return (
-    <Router url={props.url} root={Layout}>
-      <Route path="/" component={Index} preload={() => {
-        void hello();
-      }} />
-      <Route path="/about" component={About} />
-      <Route path="*404" component={NotFound} />
+    <Router>
+      {props => <Layout {...props} />}
     </Router>
   )
 }

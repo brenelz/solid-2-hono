@@ -10,11 +10,11 @@
   },
   "dependencies": {
     "@hono/node-server": "2.0.10",
-    "@solidjs/router": "0.17.0-next.6",
-    "@solidjs/web": "2.0.0-beta.21",
+    "@solidjs/router": "1.0.0-next.8",
+    "@solidjs/web": "2.0.0-beta.23",
     "hono": "4.12.31",
-    "solid-js": "2.0.0-beta.21",
-    "vite-plugin-solid": "3.0.0-next.14"
+    "solid-js": "2.0.0-beta.23",
+    "vite-plugin-solid": "3.0.0-next.15"
   },
   "devDependencies": {
     "@hono/vite-dev-server": "0.26.1",

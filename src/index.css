@@ -103,7 +103,7 @@ nav a {
 }
 
 nav a:hover,
-nav a.active {
+nav a[data-active] {
   color: #f7f9ff;
   background: #252b3a;
 }
